@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
+import Home from "./components/Home";
+import Search from "./components/Search";
+import PageNotFound from "./components/PageNotFound";
+import Restaurant from "./components/Restaurant";
+import {Route, Routes} from "react-router-dom";
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <div className="container-fluid">
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/search/:meal_id/:meal_type_name" element={<Search />}/>
+          <Route path="/restaurant/:id" element={<Restaurant />}/>
+          <Route path="*" element={<PageNotFound />}/>
+        </Routes>
+      </div>
 
-export default App;
+    </>
+
+  );
+};
+
+// export area --> export function
+// module.exports = App; es5
+export default App; //es6

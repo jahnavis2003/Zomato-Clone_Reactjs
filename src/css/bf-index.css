@@ -1,0 +1,52 @@
+body{
+    height: 100%;
+    background-color:#f8f9fa;
+}
+p{
+    margin-bottom: 0 !important;
+}
+
+.logo{
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    /* text center */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.restaurant-image{
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+}
+
+.text-dark-blue{
+    color: #192f60 !important;
+}
+
+.zomato-paging > li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid gray;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    transition-property: all;
+}
+
+.zomato-paging > li:hover{
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+
+}
+/* .zomato-paging-active{
+    background-color: gray !important;
+    color: white;
+} */

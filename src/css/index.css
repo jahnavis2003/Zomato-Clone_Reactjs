@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+body, button, input{
+    font-family: Poppins;
+}
+
+.location-list{
+    position: relative;
+}
+
+.location-list>ul{
+    position: absolute;
+    width: 100%;
+    top: 100%;
+}
+
+.location-list > ul > li:hover{
+    background-color: rgb(184, 142, 223);
+    cursor: pointer;
+}
+
+.brand{
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    color: red;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.main-section{
+    height: 70vh;
+    background-image: linear-gradient(transparent,#170505dc), url(../css/main-bg.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.input{
+    outline: none;
+}
+img{
+    height: 100%;
+    width: 20vh;
+    
+}
+.boxes{
+    height: 25vh;
+    width: 48vh;
+    box-shadow: 4px 4px 10px #00000029;
+    transition-property: transform, box-shadow;
+    transition-duration: 0.5s;
+}
+
+.boxes:hover{
+    transform: scale(1.05);
+    box-shadow: 4px 4px 10px 3px rgb(120, 119, 119);
+    cursor: pointer;
+
+}
