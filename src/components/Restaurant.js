@@ -36,59 +36,59 @@ const Restaurant = () => {
     };
     let makePayment = async() =>{
         let url = `http://localhost:3030/api/create-order-id`;
-        let {data} = await axios.post(url, {amount: totalPrices*100});
+        let {data} = await axios.post(url, {amount: totalPrices});
         let {order} = await data;
         console.log(order);
-            var options = {
-                "key": "rzp_test_RB0WElnRLezVJ5", // Enter the Key ID generated from the Dashboard
-                "amount": (order.amount), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-                "currency": order.currency,
-                "name": "Zomato Clone",
-                "description": "Make Payment to proceed",
-                "image": "../images/assets/Zomato_logo.png",
-                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                "handler": async function (response){
-                    try{
-                        let userOrders = menu.filter((menu)=> menu.qty > 0 );
-                        let sendData = {
-                            payment_id: response.razorpay_payment_id,
-                            order_id: response.razorpay_order_id,
-                            signature: response.razorpay_signature,
-                            order: userOrders
-                        };
-                        let url = `http://localhost:3030/api/verify-payment`;
-                        let { data } =  await axios.post(url, sendData);
-                        console.log(data);
-                        if(data.status == true){
-                            alert("Payment done successfully, order saved");
-                            window.location.assign("/");
-                        }
-                        else{
-                            alert("Payment failed");
-                        }
-
-                    } catch (error) {
-                        console.log(error);
+        var options = {
+            "key": "rzp_test_RB0WElnRLezVJ5", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": order.currency,
+            "name": "Zomato Clone",
+            "description": "Make Payment to proceed",
+            "image": "../images/assets/Zomato_logo.png",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": async function (response){
+                try{
+                    let userOrders = menu.filter((menu)=> menu.qty > 0 );
+                    let sendData = {
+                        payment_id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id,
+                        signature: response.razorpay_signature,
+                        order: userOrders
+                    };
+                    let url = `http://localhost:3030/api/verify-payment`;
+                    let { data } =  await axios.post(url, sendData);
+                    console.log(data);
+                    if(data.status == true){
+                        alert("Payment done successfully, order saved");
+                        window.location.assign("/");
                     }
-                    
-                },
-                "prefill": {
-                    "name": "Gaurav Kumar",
-                    "email": "gaurav.kumar@example.com",
-                    "contact": "9000090000"
-                },
-            };
-            var rzp1 = new window.Razorpay(options);
-            rzp1.on('payment.failed', function (response){
-                    alert(response.error.code);
-                    alert(response.error.description);
-                    alert(response.error.source);
-                    alert(response.error.step);
-                    alert(response.error.reason);
-                    alert(response.error.metadata.order_id);
-                    alert(response.error.metadata.payment_id);
-            });
-            rzp1.open();
+                    else{
+                        alert("Payment failed");
+                    }
+
+                } catch (error) {
+                    console.log(error);
+                }
+                
+            },
+            "prefill": {
+                "name": "Gaurav Kumar",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9000090000"
+            },
+        };
+        var rzp1 = new window.Razorpay(options);
+        rzp1.on('payment.failed', function (response){
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+        });
+        rzp1.open();
     };
     useEffect(()=>{
         getRestaurantDetails()
@@ -288,9 +288,6 @@ const Restaurant = () => {
                             <ul className="list-unstyled d-flex gap-3">
                             <li>
                                 Overview
-                            </li>
-                            <li>
-                                Contact
                             </li>
                             </ul>
                             <a
