@@ -13,7 +13,7 @@ const Restaurant = () => {
     let [menu, setMenu] = useState([]);
     let [totalPrices,setTotalPrice] = useState(0);
     let getRestaurantDetails = async() =>{
-        let url = `${base_url}get-restaurant-details-by-id/${id}`;
+        let url = `${base_url}api/get-restaurant-details-by-id/${id}`;
         let response = await fetch(url,{method:"GET"});
         let data = await response.json();
         setRDetails(data.result);
