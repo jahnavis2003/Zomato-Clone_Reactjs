@@ -1,14 +1,19 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
+import ReactDOM from "react-dom";
 import Header from "./Header";
 import { useParams } from "react-router-dom";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import axios from 'axios';
+import base_url from '../api';
+
 const Restaurant = () => {
     let { id } = useParams();
     let [rDetails,setRDetails] = useState(null);
     let [menu, setMenu] = useState([]);
     let [totalPrices,setTotalPrice] = useState(0);
     let getRestaurantDetails = async() =>{
-        let url = `http://localhost:3030/api/get-restaurant-details-by-id/${id}`;
+        let url = `${base_url}get-restaurant-details-by-id/${id}`;
         let response = await fetch(url,{method:"GET"});
         let data = await response.json();
         setRDetails(data.result);
@@ -17,7 +22,7 @@ const Restaurant = () => {
         // }).join(", "));
     };
     let getMenuList =  async() =>{
-        let url = `http://localhost:3030/api/get-menu-items-by-restaurant-id/${id}`;
+        let url = `${base_url}api/get-menu-items-by-restaurant-id/${id}`;
         let response = await fetch(url,{method:"GET"});
         let data = await response.json();
         setMenu(data.result);
@@ -35,7 +40,7 @@ const Restaurant = () => {
         setMenu([...menu]);
     };
     let makePayment = async() =>{
-        let url = `http://localhost:3030/api/create-order-id`;
+        let url = `${base_url}api/create-order-id`;
         let {data} = await axios.post(url, {amount: totalPrices});
         let {order} = await data;
         console.log(order);
@@ -56,10 +61,10 @@ const Restaurant = () => {
                         signature: response.razorpay_signature,
                         order: userOrders
                     };
-                    let url = `http://localhost:3030/api/verify-payment`;
+                    let url = `${base_url}api/verify-payment`;
                     let { data } =  await axios.post(url, sendData);
                     console.log(data);
-                    if(data.status == true){
+                    if(data.status === true){
                         alert("Payment done successfully, order saved");
                         window.location.assign("/");
                     }
@@ -105,15 +110,15 @@ const Restaurant = () => {
             <div className="modal-dialog modal-lg " style= {{height:"75vh"}} >
                 <div className="modal-content">
                     <div className="modal-body h-75">
-                    {/* <Carousel showThumbs={false} infiniteLoop={true}>
-                        {rDetails.thumb.map((value, index) => {
-                        return (
-                            <div key={index} className="w-100">
-                            <img src={"/images/" + value} />
-                            </div>
-                        );
-                        })}
-                    </Carousel>*/ }
+                        <Carousel showThumbs={false} infiniteLoop={true}>
+                            {rDetails.thumb.map((value, index) => {
+                            return (
+                                <div key={index} className="w-100">
+                                    <img src={"/images/" + value} />
+                                </div>
+                            );
+                            })}
+                        </Carousel>
                     </div>
                 </div>
             </div>

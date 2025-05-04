@@ -1,4 +1,5 @@
 import { useState } from "react";
+import base_url from '../api';
 import axios from 'axios';
 const Header = (props) =>{
     let [newUser,setNewUser] = useState({
@@ -14,7 +15,7 @@ const Header = (props) =>{
     });
     let saveNewUser = async () => {
         try{
-            let url = `http://localhost:3030/api/create-user-account`;
+            let url = `${base_url}api/create-user-account`;
             let {data} = await axios.post(url, {...newUser});
             alert(data.message);
             if(data.status === true){
@@ -27,7 +28,7 @@ const Header = (props) =>{
     };
     let userLogin = async() => {
         try{
-            let url = `http://localhost:3030/api/user-login`;
+            let url = `${base_url}api/user-login`;
             let {data} = await axios.post(url, {...login});
             alert(data.message);
             if(data.status === true){

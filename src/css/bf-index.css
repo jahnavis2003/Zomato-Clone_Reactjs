@@ -28,7 +28,7 @@ p{
     color: #192f60 !important;
 }
 
-.zomato-paging > li{
+.zomato-paging > button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -40,7 +40,7 @@ p{
     transition-property: all;
 }
 
-.zomato-paging > li:hover{
+.zomato-paging > button:hover{
     cursor: pointer;
     background-color: gray;
     color: white;

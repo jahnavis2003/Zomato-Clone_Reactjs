@@ -1,6 +1,7 @@
 import {useEffect} from "react";
 import { useState } from "react";
 import axios from 'axios';
+import base_url from '../api';
 // import { getLocationList } from "";
 import {useNavigate} from "react-router-dom";
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
     });
     let userLogin = async() => {
         try{
-            let url = `http://localhost:3030/api/user-login`;
+            let url = `${base_url}api/user-login`;
             let {data} = await axios.post(url, {...login});
             alert(data.message);
             console.log(data);
@@ -30,7 +31,7 @@ const Home = () => {
     };
     let saveNewUser = async () => {
         try{
-            let url = `http://localhost:3030/api/create-user-account`;
+            let url = `${base_url}api/create-user-account`;
             let {data} = await axios.post(url, {...newUser});
             alert(data.message);
             if(data.status === true){
@@ -50,7 +51,7 @@ const Home = () => {
     let getMealTypes = async()=>{
         
        try {
-         let url = `http://localhost:3030/api/get-meal-type-list`;
+         let url = `${base_url}api/get-meal-type-list`;
         let response = await fetch(url, {method:`GET`});
         let data = await response.json();
         // console.log(data);
@@ -63,7 +64,7 @@ const Home = () => {
        try
        { setPlaceHolderText('Getting location list... ');
        setRestaurantList([]);
-        let url = `http://localhost:3030/api/get-locations-list`;
+        let url = `${base_url}api/get-locations-list`;
         let response = await fetch(url, {method:"GET"});
         let data = await response.json();
         setLocations(data.result);
@@ -75,7 +76,7 @@ const Home = () => {
 
     let getRestaurantListByLocationId = async(id,name,city) => {
         try{
-            let url = `http://localhost:3030/api/get-restaurant-list-by-location-id/${id}`;
+            let url = `${base_url}api/get-restaurant-list-by-location-id/${id}`;
             let response = await fetch(url, {method: "GET"});
             let data = await response.json();
             console.log(data);
